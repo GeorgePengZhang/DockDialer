@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x190"
+        android:src="@drawable/dialer_right_line1_n" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#bec3ca" />
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x190"
+        android:background="@drawable/common_btn_gay"
+        android:clickable="true"
+        android:src="@drawable/dialer_right_line2_n" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#bec3ca" />
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x190"
+        android:background="@drawable/common_btn_gay"
+        android:clickable="true"
+        android:src="@drawable/dialer_right_line3" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#bec3ca" />
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/common_btn_gay"
+        android:clickable="true"
+        android:src="@drawable/dialer_right_note" />
+
+</LinearLayout>

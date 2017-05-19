@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="common_btn_selected_gay">#88999999</color>
+    <color name="common_btn_selected_white">#88ffffff</color>
+
+</resources>
