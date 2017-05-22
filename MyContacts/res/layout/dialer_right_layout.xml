@@ -6,7 +6,8 @@
 
     <ImageView
         android:layout_width="match_parent"
-        android:layout_height="@dimen/x190"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         android:src="@drawable/dialer_right_line1_n" />
 
     <View
@@ -16,7 +17,8 @@
 
     <ImageView
         android:layout_width="match_parent"
-        android:layout_height="@dimen/x190"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         android:background="@drawable/common_btn_gay"
         android:clickable="true"
         android:src="@drawable/dialer_right_line2_n" />
@@ -24,11 +26,14 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
+        android:visibility="gone"
         android:background="#bec3ca" />
 
     <ImageView
         android:layout_width="match_parent"
-        android:layout_height="@dimen/x190"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:visibility="gone"
         android:background="@drawable/common_btn_gay"
         android:clickable="true"
         android:src="@drawable/dialer_right_line3" />
@@ -40,7 +45,8 @@
 
     <ImageView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="2"
         android:background="@drawable/common_btn_gay"
         android:clickable="true"
         android:src="@drawable/dialer_right_note" />

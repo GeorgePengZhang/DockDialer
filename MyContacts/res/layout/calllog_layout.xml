@@ -26,23 +26,47 @@
 
         <TextView
             android:id="@+id/id_clear"
-            android:clickable="true"
-            android:focusable="true"
-            android:paddingLeft="20dp"
-            android:paddingRight="20dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
+            android:clickable="true"
+            android:focusable="true"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:text="Clear"
             android:textColor="@color/calllog_clear_btn"
-            android:textSize="22sp"
-            android:text="Clear" />
-
+            android:textSize="22sp" />
     </RelativeLayout>
 
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="#88bec3ca" />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <com.flyco.tablayout.widget.SwipeListView
+            android:id="@+id/id_listview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:cacheColorHint="#00000000"
+            tl:right_width="100dp"
+            android:listSelector="@android:color/transparent"
+            android:divider="@color/common_btn_selected_gay"
+            android:dividerHeight="1dp" >
+        </com.flyco.tablayout.widget.SwipeListView>
+
+        <TextView
+            android:id="@+id/id_empty"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="@string/recentCalls_empty"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="?android:attr/textColorSecondary" />
+    </FrameLayout>
 
 </LinearLayout>

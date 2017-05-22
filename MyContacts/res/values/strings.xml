@@ -7,9 +7,22 @@
     <string name="contacts">Contacts</string>
     <string name="favorites">Favorites</string>
     <string name="settings">Settings</string>
+
     <string-array name="calllogtitles">
-        <item >All Calls</item>
-        <item >Missed Calls</item>
+        <item>All Calls</item>
+        <item>Missed Calls</item>
     </string-array>
-    
+
+    <string name="call_log_empty_gecode">-</string>
+    <!-- String used to display calls from unknown numbers in the call log -->
+    <string name="unknown">Unknown</string>
+    <!-- String used to display calls from private numbers in the call log -->
+    <string name="private_num">Private number</string>
+    <!-- String used to display calls from pay phone in the call log -->
+    <string name="payphone">Pay phone</string>
+    <string name="recentCalls_empty">Call log is empty.</string>
+    <string name="search">Search</string>
+    <string name="contacts_num">contacts</string>
+    <string name="noContactsHelpText">"You don't have any contacts to display."</string>
+
 </resources>

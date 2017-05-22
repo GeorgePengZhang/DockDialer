@@ -6,13 +6,13 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.view.View;
-import android.view.ViewGroup;
 
 import com.flyco.tablayout.CommonTabLayout;
 import com.flyco.tablayout.listener.CustomTabEntity;
 import com.flyco.tablayout.listener.TabEntity;
 import com.flyco.tablayout.utils.ViewFindUtils;
-import com.pachong.mycontacts.fragment.CallLogFragment;
+import com.pachong.mycontacts.fragment.CallsLogListFragment;
+import com.pachong.mycontacts.fragment.ContactsPhoneListFragment;
 import com.pachong.mycontacts.fragment.DialerFragment;
 
 public class MainActivity extends FragmentActivity {
@@ -34,9 +34,10 @@ public class MainActivity extends FragmentActivity {
 		setContentView(R.layout.activity_main);
 		
 		mFragments.add(new DialerFragment());
-		mFragments.add(new CallLogFragment());
+		mFragments.add(new CallsLogListFragment());
+		mFragments.add(new ContactsPhoneListFragment());
 		
-		for (int i = 2; i < mTitlesTextIds.length; i++) {
+		for (int i = 3; i < mTitlesTextIds.length; i++) {
             mFragments.add(SimpleCardFragment.getInstance("Switch ViewPager " + getString(mTitlesTextIds[i])));
         }
 		
@@ -48,6 +49,7 @@ public class MainActivity extends FragmentActivity {
 		mDecorView = getWindow().getDecorView();
 		mTopTabLayout = ViewFindUtils.find(mDecorView, R.id.id_top_tab);
 		mTopTabLayout.setTabData(mTabEntities, this, R.id.id_content, mFragments);
+		
 	}
 
 }
