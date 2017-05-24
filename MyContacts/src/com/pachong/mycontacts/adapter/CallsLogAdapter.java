@@ -11,13 +11,14 @@ import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.text.TextUtils;
 import android.text.format.DateUtils;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.LinearLayout.LayoutParams;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.LinearLayout.LayoutParams;
 
 import com.pachong.mycontacts.R;
 import com.pachong.mycontacts.bean.CallsLogBean;
@@ -30,16 +31,18 @@ import com.pachong.mycontacts.utils.ContactsPhotoLoader;
  * @author: steven zhang
  * @date: Sep 27, 2016 2:31:16 PM
  */
-public class CallsLogAdapter extends BaseAdapter {
+public class CallsLogAdapter extends BaseAdapter implements OnClickListener {
 	
 	private List<CallsLogBean> mList;
 	private Context mContext;
 	private int mRightWidth;
+	private IOnItemInfoClickListener mListener;
 	
-	public CallsLogAdapter(Context context, List<CallsLogBean> list, int rightWidth) {
+	public CallsLogAdapter(Context context, List<CallsLogBean> list, int rightWidth, IOnItemInfoClickListener listener) {
 		mContext = context;
 		mList = list;
 		mRightWidth = rightWidth;
+		mListener = listener;
 	}
 
 	@Override
@@ -74,6 +77,7 @@ public class CallsLogAdapter extends BaseAdapter {
 			viewHolder.typeicon = convertView.findViewById(R.id.call_type_icons);
 			viewHolder.typedate = (TextView) convertView.findViewById(R.id.call_count_and_date);
 //			viewHolder.duration = (TextView) convertView.findViewById(R.id.call_duration);
+			viewHolder.info = (ImageView) convertView.findViewById(R.id.id_callog_info);
 			
 			convertView.setTag(viewHolder);
 		} else {
@@ -84,10 +88,6 @@ public class CallsLogAdapter extends BaseAdapter {
 		viewHolder.leftLayout.setLayoutParams(lp1);
 		LinearLayout.LayoutParams lp2 = new LayoutParams(mRightWidth,LayoutParams.MATCH_PARENT);
 		viewHolder.rightLayout.setLayoutParams(lp2);
-		
-		
-		
-		
 		
 		CallsLogBean bean = (CallsLogBean) getItem(position);
 		
@@ -143,6 +143,12 @@ public class CallsLogAdapter extends BaseAdapter {
         viewHolder.number.setText(numberText);
         //设置用户电话类型
         viewHolder.label.setText(labelText);
+        
+        viewHolder.info.setOnClickListener(this);
+        viewHolder.info.setTag(position);
+        
+        viewHolder.rightLayout.setOnClickListener(this);
+        viewHolder.rightLayout.setTag(position);
         //------------------------------------
 		
         //设置用户头像
@@ -170,6 +176,7 @@ public class CallsLogAdapter extends BaseAdapter {
 		private TextView typedate;
 //		private TextView duration;
 		private View typeicon;
+		private ImageView info;
 	}
 
 	
@@ -230,4 +237,19 @@ public class CallsLogAdapter extends BaseAdapter {
     	
     	return time;
     }
+    
+    public interface IOnItemInfoClickListener {
+    	public void onItemInfoClick(View v);
+    }
+    
+    public void setOnItemInfoClickListener(IOnItemInfoClickListener listener) {
+    	mListener = listener;
+    }
+
+	@Override
+	public void onClick(View v) {
+		if (mListener != null) {
+			mListener.onItemInfoClick(v);
+		}
+	}
 }

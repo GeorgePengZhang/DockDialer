@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    android:key="screen_list"
+    android:summary="seleccities">
+    <!--    android:title="Select Area Code" >
+  
+
+    <com.android.contacts.dialpad.PrefSet android:key="select_area" >
+    </com.android.contacts.dialpad.PrefSet>-->
+    <com.pachong.mycontacts.MyListPreference
+        android:dialogTitle="Cities from Abra to Bulacan Obando"
+        android:entries="@array/a_b"
+        android:entryValues="@array/a_b"
+        android:key="citiesab"
+        android:summary="Cities from Abra to Bulacan Obando"
+        android:title="A————B" >
+    </com.pachong.mycontacts.MyListPreference>
+    <com.pachong.mycontacts.MyListPreference
+        android:dialogTitle="Cities from Cagayan Valley to Isabela"
+        android:entries="@array/c_i"
+        android:entryValues="@array/c_i"
+        android:key="citiesci"
+        android:summary="Cities from Cagayan Valley to Isabela"
+        android:title="C————I" >
+    </com.pachong.mycontacts.MyListPreference>
+    <com.pachong.mycontacts.MyListPreference
+        android:dialogTitle="Cities from Kalinga Apayao to Mt. Province"
+        android:entries="@array/k_m"
+        android:entryValues="@array/k_m"
+        android:key="citieskm"
+        android:summary="Cities from Kalinga Apayao to Mt. Province"
+        android:title="K————M" >
+    </com.pachong.mycontacts.MyListPreference>
+    <com.pachong.mycontacts.MyListPreference
+        android:dialogTitle="Cities from Negros Occidental to Romblon"
+        android:entries="@array/n_r"
+        android:entryValues="@array/n_r"
+        android:key="citiesnr"
+        android:summary="Cities from Negros Occidental to Romblon"
+        android:title="N————R" >
+    </com.pachong.mycontacts.MyListPreference>
+    <com.pachong.mycontacts.MyListPreference
+        android:dialogTitle="Cities from Samar  to Zamboanga Sibugay"
+        android:entries="@array/s_z"
+        android:entryValues="@array/s_z"
+        android:key="citiessz"
+        android:summary="Cities from Samar  to Zamboanga Sibugay"
+        android:title="S————Z" >
+    </com.pachong.mycontacts.MyListPreference>
+
+</PreferenceScreen>

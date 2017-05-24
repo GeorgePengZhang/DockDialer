@@ -14,6 +14,8 @@ import com.flyco.tablayout.utils.ViewFindUtils;
 import com.pachong.mycontacts.fragment.CallsLogListFragment;
 import com.pachong.mycontacts.fragment.ContactsPhoneListFragment;
 import com.pachong.mycontacts.fragment.DialerFragment;
+import com.pachong.mycontacts.fragment.FavoritesListFragment;
+import com.pachong.mycontacts.fragment.SettingsFragment;
 
 public class MainActivity extends FragmentActivity {
 
@@ -36,10 +38,9 @@ public class MainActivity extends FragmentActivity {
 		mFragments.add(new DialerFragment());
 		mFragments.add(new CallsLogListFragment());
 		mFragments.add(new ContactsPhoneListFragment());
-		
-		for (int i = 3; i < mTitlesTextIds.length; i++) {
-            mFragments.add(SimpleCardFragment.getInstance("Switch ViewPager " + getString(mTitlesTextIds[i])));
-        }
+		mFragments.add(new FavoritesListFragment());
+		mFragments.add(new SettingsFragment());
+            
 		
 		for (int i = 0; i < mTitlesTextIds.length; i++) {
             mTabEntities.add(new TabEntity(getString(mTitlesTextIds[i]), mTitlesIconIds[i], mTitlesIconIds[i]));

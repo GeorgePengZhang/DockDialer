@@ -11,13 +11,8 @@ import android.app.ActivityManager;
 import android.app.ActivityManager.RunningTaskInfo;
 import android.content.ComponentName;
 import android.content.Context;
-import android.database.Cursor;
-import android.net.Uri;
-import android.net.Uri.Builder;
 import android.os.Build;
-import android.os.CancellationSignal;
 import android.os.Environment;
-import android.provider.ContactsContract;
 import android.util.Log;
 import android.view.View;
 

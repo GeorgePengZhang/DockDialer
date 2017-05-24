@@ -271,7 +271,7 @@ public class CallsLogBean implements Parcelable {
 		CallsLogBean bean = null;
 		
 		if (cursor != null) {
-			long id = cursor.getInt(ContactsUtils.Calls.ID);
+			long id = cursor.getLong(ContactsUtils.Calls.ID);
 			String number = cursor.getString(ContactsUtils.Calls.NUMBER);
 			long date = cursor.getLong(ContactsUtils.Calls.DATE);
 			long duration = cursor.getLong(ContactsUtils.Calls.DURATION);

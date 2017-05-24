@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="a_b">
+        <item>Abra (074)</item>
+        <item> Agusan Del Norte (085)</item>
+        <item> Agusan Del Sur (085)</item>
+        <item>Aklan (036)</item>
+        <item>Albay (052)</item>
+        <item>Antique (036)</item>
+        <item>Apayao (074)</item>
+        <item>Aurora (042)</item>
+        <item>Basilan (062)</item>
+        <item> Bataan (047)</item>
+        <item> Batanes (078)</item>
+        <item> Batangas (043)</item>
+        <item> Benguet (074)</item>
+        <item>Biliran (053)</item>
+        <item>Bohol (038)</item>
+        <item> Bukidnon (088)</item>
+        <item> Bulacan (044)</item>
+        <item>Bulacan  Obando (02)</item>
+    </string-array>
+    <string-array name="values_ab">
+        <item>074</item>
+        <item> 085</item>
+        <item> 085</item>
+        <item>036</item>
+        <item>052</item>
+        <item>036</item>
+        <item>074</item>
+        <item>042</item>
+        <item>062</item>
+        <item>047</item>
+        <item> 078</item>
+        <item> 043</item>
+        <item> 074</item>
+        <item>053</item>
+        <item>038</item>
+        <item> 088</item>
+        <item> 044</item>
+        <item>02</item>
+    </string-array>
+    <string-array name="c_i">
+        <item>    Cagayan Valley (078)</item>
+        <item>Camarines Norte (054)</item>
+        <item>Camarines Sur (054)</item>
+        <item>Camiguin (088)</item>
+        <item>Capiz (036)</item>
+        <item>Catanduanes (052)</item>
+        <item> Cavite (046)</item>
+        <item>Cebu (032)</item>
+        <item>Compostela Valley (084)</item>
+        <item>Cotabato (064)</item>
+        <item> Davao Del Norte (084)</item>
+        <item> Davao Del Sur (082)</item>
+        <item> Davao Oriental (087)</item>
+        <item> Eastern Samar (055)</item>
+        <item>Guimaras (033)</item>
+        <item>Ifugao (074)</item>
+        <item>Ilocos Norte (077)</item>
+        <item> Ilocos Sur (077)</item>
+        <item> Iloilo (033)</item>
+        <item>Isabela (078)</item>
+    </string-array>
+    <string-array name="values_ci">
+        <item> 078</item>
+        <item>054</item>
+        <item>054</item>
+        <item>088</item>
+        <item>036</item>
+        <item>052</item>
+        <item> 046</item>
+        <item>032</item>
+        <item>084</item>
+        <item>064</item>
+        <item> 084</item>
+        <item>082</item>
+        <item>087</item>
+        <item>055</item>
+        <item>033</item>
+        <item>074</item>
+        <item>077</item>
+        <item>077</item>
+        <item>033</item>
+        <item>078</item>
+    </string-array>
+    <string-array name="k_m">
+        <item>    Kalinga Apayao (074)</item>
+        <item>La Union (072)</item>
+        <item>Laguna (049)</item>
+        <item>Laguna  San Pedro (02)</item>
+        <item> Lanao Del Norte (063)</item>
+        <item>Lanao Del Sur (063)</item>
+        <item> Leyte (053)</item>
+        <item> Maguindanao (064)</item>
+        <item>Marinduque (042)</item>
+        <item> Masbate (056)</item>
+        <item>Metro Manila, Laguna-San Pedro, Bulacan-Obando (02)</item>
+        <item> Mindoro Occidental (043)</item>
+        <item> Mindoro Oriental (043)</item>
+        <item> Misamis Occidental (088)</item>
+        <item> Misamis Oriental (088)</item>
+        <item>Mt. Province (074)</item>
+    </string-array>
+    <string-array name="values_km">
+        <item>074</item>
+        <item>072</item>
+        <item>049</item>
+        <item>(02</item>
+        <item> 063</item>
+        <item>063</item>
+        <item>053</item>
+        <item>064</item>
+        <item>042</item>
+        <item>056</item>
+        <item>02</item>
+        <item>043</item>
+        <item>043</item>
+        <item>088</item>
+        <item>088</item>
+        <item>074</item>
+    </string-array>
+    <string-array name="n_r">
+        <item>  Negros Occidental (034)</item>
+        <item> Negros Oriental (035)</item>
+        <item> North Cotabato (064)</item>
+        <item> Northern Samar (055)</item>
+        <item> Nueva Ecija (044)</item>
+        <item>Nueva Viscaya (078)</item>
+        <item> Palawan (048)</item>
+        <item> Pampanga (045)</item>
+        <item>Pangasinan (075)</item>
+        <item> Quezon (042)</item>
+        <item>Quirino (078)</item>
+        <item> Rizal (02)</item>
+        <item>Romblon (042)</item>
+    </string-array>
+    <string-array name="values_nr">
+        <item>  034</item>
+        <item>035</item>
+        <item> 064</item>
+        <item>055</item>
+        <item>044</item>
+        <item>078</item>
+        <item>048</item>
+        <item>045</item>
+        <item>075</item>
+        <item> 42</item>
+        <item>078</item>
+        <item>02</item>
+        <item>042</item>
+    </string-array>
+    <string-array name="s_z">
+        <item>  Samar (Western Samar) (055)</item>
+        <item> Sarangani (083)</item>
+        <item> Siquijor (035)</item>
+        <item>Sorsogon (056)</item>
+        <item>South Cotabato (083)</item>
+        <item>Southern Leyte (053)</item>
+        <item>Sultan Kudarat (064)</item>
+        <item>Sulu (068)</item>
+        <item>Surigao Del Norte (086)</item>
+        <item>Surigao Del Sur (086)</item>
+        <item>Tarlac (045)</item>
+        <item>Tawi-tawi (068)</item>
+        <item>Zambales (047)</item>
+        <item>Zamboanga Del Norte (065)</item>
+        <item>Zamboanga Del Sur (062)</item>
+        <item>Zamboanga Sibugay (062)</item>
+    </string-array>
+    <string-array name="values_sz">
+        <item> 055</item>
+        <item> 083</item>
+        <item> 035</item>
+        <item>056</item>
+        <item>083</item>
+        <item>053</item>
+        <item>064</item>
+        <item>068</item>
+        <item>086</item>
+        <item>086</item>
+        <item>045</item>
+        <item>068</item>
+        <item>047</item>
+        <item>065</item>
+        <item>062</item>
+        <item>062</item>
+    </string-array>
+
+    
+    <string-array name="phoneareList">
+        <item>074</item>
+        <item>085</item>
+        <item>036</item>
+        <item>052</item>
+        <item>042</item>
+        <item>062</item>
+        <item>047</item>
+        <item>078</item>
+        <item>043</item>
+        <item>053</item>
+        <item>038</item>
+        <item>088</item>
+        <item>044</item>
+        <item>02</item>
+        <item>054</item>
+        <item>046</item>
+        <item>032</item>
+        <item>084</item>
+        <item>064</item>
+        <item>082</item>
+        <item>087</item>
+        <item>055</item>
+        <item>033</item>
+        <item>077</item>
+        <item>072</item>
+        <item>049</item>
+        <item>063</item>
+        <item>056</item>
+        <item>034</item>
+        <item>035</item>
+        <item>048</item>
+        <item>045</item>
+        <item>075</item>
+        <item>042</item>
+       	<item>083</item>
+        <item>068</item>
+        <item>086</item>
+        <item>065</item>
+    </string-array>
+    
+    
+</resources>

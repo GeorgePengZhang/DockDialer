@@ -1,5 +1,6 @@
 package com.pachong.mycontacts.fragment;
 
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -7,7 +8,6 @@ import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import android.app.Activity;
 import android.content.AsyncQueryHandler;
 import android.content.BroadcastReceiver;
 import android.content.ContentResolver;
@@ -15,22 +15,25 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
 import android.provider.ContactsContract;
+import android.provider.ContactsContract.Contacts;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.LocalBroadcastManager;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.flyco.tablayout.widget.ClearEditText;
 import com.flyco.tablayout.widget.SideBar;
@@ -66,6 +69,7 @@ public class ContactsPhoneListFragment extends Fragment implements OnTouchingLet
 	private TextView mContactsCounts;
 	private TextView mEmptyView;
 	private ClearEditText mClearEdit;
+	private boolean mRefreshDataRequired = true;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -82,7 +86,7 @@ public class ContactsPhoneListFragment extends Fragment implements OnTouchingLet
 			mClearEdit.addTextChangedListener(mTextWatcher);
 		}
 		
-		myQueryHandler = new MyQueryHandler(getActivity().getContentResolver());
+		myQueryHandler = new MyQueryHandler(getActivity().getContentResolver(), this);
 		mDataList = new ArrayList<ContactsPhoneBean>();
 		
 		mEmptyView = (TextView) view.findViewById(R.id.id_empty);
@@ -95,7 +99,14 @@ public class ContactsPhoneListFragment extends Fragment implements OnTouchingLet
 	    mListView.addFooterView(mContactsCounts);
 	    mContactsCounts.setText(mDataList.size()+" "+getActivity().getResources().getString(R.string.contacts_num));
 	    
-	    
+	    view.findViewById(R.id.id_add_contacts).setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent(Intent.ACTION_INSERT, Contacts.CONTENT_URI);
+				startActivity(intent);
+			}
+		});
 	    mListView.setOnItemClickListener(this);
 	    
 	    Intent intent = new Intent(getActivity(), ContactsSyncService.class);
@@ -108,13 +119,16 @@ public class ContactsPhoneListFragment extends Fragment implements OnTouchingLet
 	}
 	
 	@Override
+	public void onStart() {
+		super.onStart();
+		Intent intent = new Intent(getActivity(), ContactsSyncService.class);
+	    getActivity().startService(intent);
+	}
+	
+	@Override
 	public void onResume() {
 		super.onResume();
-		if (mPhoneAdapter != null) {
-			mPhoneAdapter.notifyDataSetChanged();
-		} else {
-			myQueryHandler.startQuery(0, null, ContactsUtils.Phone.CONTENT_CALLABLES_URI, ContactsUtils.Phone.PROJECTION_PRIMARY, null, null, ContactsContract.CommonDataKinds.Phone.SORT_KEY_PRIMARY);
-		}
+		refreshData();
 	}
 	
 	@Override
@@ -128,11 +142,9 @@ public class ContactsPhoneListFragment extends Fragment implements OnTouchingLet
 		@Override
 		public void onReceive(Context context, Intent intent) {
 			String action = intent.getAction();
+			Log.d("TAG", "UPDATE_CONTACTS:"+action);
 			if (ContactsSyncService.UPDATE_CONTACTS.equals(action)) {
-				if (myQueryHandler != null) {
-					myQueryHandler.cancelOperation(0);
-					myQueryHandler.startQuery(0, null, ContactsUtils.Phone.CONTENT_CALLABLES_URI, ContactsUtils.Phone.PROJECTION_PRIMARY, null, null, ContactsContract.CommonDataKinds.Phone.SORT_KEY_PRIMARY);
-				}
+				mRefreshDataRequired = true;
 			}
 		}
 	};
@@ -151,30 +163,53 @@ public class ContactsPhoneListFragment extends Fragment implements OnTouchingLet
 	}
 	
 	//异步查询联系人数据库
-	private class MyQueryHandler extends AsyncQueryHandler {
+	private static class MyQueryHandler extends AsyncQueryHandler {
+		
+		private WeakReference<ContactsPhoneListFragment> weakReference;
 
-		public MyQueryHandler(ContentResolver cr) {
+		public MyQueryHandler(ContentResolver cr, ContactsPhoneListFragment fragment) {
 			super(cr);
+			weakReference = new WeakReference<ContactsPhoneListFragment>(fragment);
 		}
 		
 		@Override
 		protected void onQueryComplete(int token, Object cookie, Cursor cursor) {
 			super.onQueryComplete(token, cookie, cursor);
-			if (cursor != null && cursor.getCount() > 0) {
-				mDataList.clear();
-				
-				while (cursor.moveToNext()) {
-					ContactsPhoneBean bean = ContactsPhoneBean.getBeanFromCursor(cursor);
-					//去掉电话号码一样的
-					if (!mDataList.contains(bean)) {
-						mDataList.add(bean);
-					}
-					Collections.sort(mDataList);
-				}
-				
-				cursor.close();
-				updateListAdapter(mDataList);
+			ContactsPhoneListFragment fragment = weakReference.get();
+			if (fragment != null) {
+				fragment.queryComplete(token, cookie, cursor);
 			}
+		}
+	}
+	
+	private void queryComplete(int token, Object cookie, Cursor cursor) {
+		mDataList.clear();
+		if (cursor != null && cursor.getCount() > 0) {
+			
+			while (cursor.moveToNext()) {
+				ContactsPhoneBean bean = ContactsPhoneBean.getBeanFromCursor(cursor);
+				//去掉电话号码一样的
+				if (!mDataList.contains(bean)) {
+					mDataList.add(bean);
+				}
+				Collections.sort(mDataList);
+			}
+			
+			cursor.close();
+			updateListAdapter(mDataList);
+		} else {
+			ContactsPhoneAdapter adapter = (ContactsPhoneAdapter) mListView.getAdapter();
+			if (adapter != null) {
+				adapter.notifyDataSetChanged();
+			}
+		}
+	}
+	
+	private void refreshData() {
+		if (mRefreshDataRequired) {
+			mRefreshDataRequired = false;
+			myQueryHandler.cancelOperation(0);
+			myQueryHandler.startQuery(0, null, ContactsUtils.Phone.CONTENT_CALLABLES_URI, ContactsUtils.Phone.PROJECTION_PRIMARY, null, null, ContactsContract.CommonDataKinds.Phone.SORT_KEY_PRIMARY);
 		}
 	}
 	
@@ -269,8 +304,13 @@ public class ContactsPhoneListFragment extends Fragment implements OnTouchingLet
 	@Override
 	public void onItemClick(AdapterView<?> parent, View view, int position,
 			long id) {
-		ContactsPhoneBean bean = mCurShowList.get(position);
-		String phone = bean.getPhone();
-		
+		ContactsPhoneBean item = (ContactsPhoneBean) mPhoneAdapter.getItem(position);
+		Uri lookupUri = Contacts.getLookupUri(item.getContactId(), item.getLookup());
+//		QuickContact.showQuickContact(getActivity(), view, lookupUri, 4, null);
+		Intent intent = new Intent(Intent.ACTION_VIEW, lookupUri);
+        // Secondary target will be visible only from phone's favorite screen, then
+        // we want to launch it as a separate People task.
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
 	}  
 }

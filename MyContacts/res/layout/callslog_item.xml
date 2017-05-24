@@ -87,6 +87,7 @@
         </LinearLayout>
 
         <ImageView
+            android:id="@+id/id_callog_info"
             android:layout_width="60dp"
             android:layout_height="match_parent"
             android:layout_marginRight="40dp"

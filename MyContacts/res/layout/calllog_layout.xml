@@ -67,6 +67,7 @@
             android:text="@string/recentCalls_empty"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:textColor="?android:attr/textColorSecondary" />
+        
     </FrameLayout>
 
 </LinearLayout>

@@ -33,6 +33,7 @@ public class ContactsSyncService extends Service {
 	
 	@Override
 	public int onStartCommand(Intent intent, int flags, int startId) {
+		getContentResolver().unregisterContentObserver(contentObserver);
 		getContentResolver().registerContentObserver(ContactsUtils.Phone.CONTENT_CALLABLES_URI, true, contentObserver);
 		getContentResolver().registerContentObserver(ContactsUtils.Calls.CONTENT_URI, true, contentObserver);
 		return START_STICKY;

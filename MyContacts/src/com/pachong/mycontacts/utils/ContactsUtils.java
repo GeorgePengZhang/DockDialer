@@ -4,6 +4,7 @@ import java.io.InputStream;
 
 import android.content.ContentUris;
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -133,7 +134,7 @@ public class ContactsUtils {
 	 * @param contactid
 	 * @return
 	 */
-	public static Uri getContactPhotoUri(int contactid) {
+	public static Uri getContactPhotoUri(long contactid) {
 		Uri uri = ContentUris.withAppendedId(ContactsContract.Contacts.CONTENT_URI, contactid);
 		return uri;
 	}
@@ -150,6 +151,82 @@ public class ContactsUtils {
 		bitmap = BitmapFactory.decodeStream(input);
 		return bitmap;
 	}
+	
+	public static boolean isUriNumber(String number) {
+        // Note we allow either "@" or "%40" to indicate a URI, in case
+        // the passed-in string is URI-escaped.  (Neither "@" nor "%40"
+        // will ever be found in a legal PSTN number.)
+        return number != null && (number.contains("@") || number.contains("%40"));
+    }
+	
+	/**
+     * Return Uri with an appropriate scheme, accepting Voicemail, SIP, and usual phone call
+     * numbers.
+     */
+    public static Uri getCallUri(String number) {
+        if (isUriNumber(number)) {
+             return Uri.fromParts("sip", number, null);
+        }
+        return Uri.fromParts("tel", number, null);
+     }
+	
+	/**
+     * Return an Intent for making a phone call. Scheme (e.g. tel, sip) will be determined
+     * automatically.
+     */
+    public static Intent getCallIntent(String number) {
+        return getCallIntent(number, null);
+    }
+
+    /**
+     * Return an Intent for making a phone call. A given Uri will be used as is (without any
+     * sanity check).
+     */
+    public static Intent getCallIntent(Uri uri) {
+        return getCallIntent(uri, null);
+    }
+
+    /**
+     * A variant of {@link #getCallIntent(String)} but also accept a call origin. For more
+     * information about call origin, see comments in Phone package (PhoneApp).
+     */
+    public static Intent getCallIntent(String number, String callOrigin) {
+        return getCallIntent(getCallUri(number), callOrigin);
+    }
+
+    /**
+     * A variant of {@link #getCallIntent(Uri)} but also accept a call origin. For more
+     * information about call origin, see comments in Phone package (PhoneApp).
+     */
+    public static Intent getCallIntent(Uri uri, String callOrigin) {
+        final Intent intent = new Intent(Intent.ACTION_CALL, uri);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        return intent;
+    }
+    
+    
+    /**
+     * Start intent using an activity inside this app. This method is useful if you are certain
+     * that the intent can be handled inside this app, and you care about shaving milliseconds.
+     */
+    public static void startActivityInApp(Context context, Intent intent) {
+        String packageName = context.getPackageName();
+        intent.setPackage(packageName);
+        context.startActivity(intent);
+    }
+
+    /**
+     * Returns an implicit intent for opening QuickContacts.
+     */
+    public static Intent composeQuickContactIntent(Uri contactLookupUri,
+            int extraMode) {
+        final Intent intent = new Intent("com.android.contacts.action.QUICK_CONTACT");
+        intent.setData(contactLookupUri);
+        intent.putExtra("mode", extraMode);
+        // Make sure not to show QuickContacts on top of another QuickContacts.
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        return intent;
+    }
 }
 
 
